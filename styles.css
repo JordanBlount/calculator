@@ -11,6 +11,7 @@ body {
     align-items: center;
 }
 
+/* TODO: Edit the sizing here so that it does not shrink too much */
 #calculator {
     width: 30vw;
     height: 75vh;
@@ -28,16 +29,30 @@ body {
     "bigger_button bigger_button . .";
 }
 
+/* Change the flexbox into a grid OR make this solution more robust */
 #screen {
     background-color: rgb(87, 87, 87);
     grid-area: screen;
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
 }
 
 #screen > p {
     color: rgb(252, 252, 252);
 }
 
+/* TODO: Make this better 
+   FIXME: Make the font size responsive.*/
+#history {
+    padding-top: 0.5rem;
+    padding-right: 0.5rem;
+}
+
+/* TODO: Make this better as well.
+   FIXME: Make the font size responsive. */
 #current_number {
+    padding-top: 1em;
     font-size: 3rem;
 }
 
@@ -48,18 +63,27 @@ button {
     border: 0.5px solid rgba(0, 0, 0, 0.514);
 }
 
+button:active {
+    background-color: rgb(189, 189, 189);
+}
+
 .function {
     background-color: rgb(65, 65, 65);
+}
+
+.function:active {
+    background-color: rgb(102, 102, 102);
 }
 
 .symbol_button {
     background-color: orange;
 }
 
-.bigger_button {
-    grid-area: bigger_button;
+/* FIXME: REMOVE THIS BECAUSE IT WILL BE DONE PROGRAMMATICALLY */
+.symbol_button:focus {
+    background-color: rgb(209, 136, 1);
 }
 
-.pressed {
-    background: rgb(189, 189, 189);
+.bigger_button {
+    grid-area: bigger_button;
 }
