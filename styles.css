@@ -42,17 +42,10 @@ body {
     color: rgb(252, 252, 252);
 }
 
-/* TODO: Make this better 
-   FIXME: Make the font size responsive.*/
-#history {
-    padding-top: 1rem;
-    padding-right: 0.5rem;
-}
-
 /* TODO: Make this better as well.
    FIXME: Make the font size responsive. */
 #current_number {
-    padding-top: 0.50em;
+    padding-top: 1.0em;
     padding-right: 0.5rem;
     font-size: 4rem;
 }
@@ -85,6 +78,15 @@ button:active {
     background-color: rgb(209, 136, 1);
 }
 
+#equals {
+    background-color: orange;
+}
+
+#equals:active {
+    background-color: rgb(209, 136, 1);
+}
+
 .bigger_button {
-    grid-area: bigger_button;
+     grid-column: 1 / 3;
+     grid-row: 7 / 8
 }

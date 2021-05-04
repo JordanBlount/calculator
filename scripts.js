@@ -16,7 +16,10 @@
 
 const display = document.getElementById('current_number');
 const clearButton = document.querySelector('#clear');
+const deleteButton = document.querySelector('#delete');
+const percentButton = document.querySelector('#percent');
 const equalsButton = document.querySelector('#equals');
+const zeroButton = document.querySelector('.bigger_button');
 
 let firstNum = "";
 let secondNum = "";
@@ -26,51 +29,38 @@ let resetScreen = false;
 const numbers = Array.from(document.querySelectorAll('.number'));
 numbers.forEach(num => {
     num.addEventListener('click', function() {
-        if(display.textContent == "Not a number") {
-            display.textContent = "";
-        }
         appendNum(num.textContent);
     });
 });
 const symbolButtons = Array.from(document.querySelectorAll('.symbol_button'));
 symbolButtons.forEach(symbol => {
     symbol.addEventListener('click', function() {
-        console.log("REACHED");
         setOperation(symbol.textContent);
     });
 });
 
 equalsButton.addEventListener('click', calculate);
 clearButton.addEventListener('click', clearScreen);
+deleteButton.addEventListener('click', deleteNum);
+percentButton.addEventListener('click', percentage);
+zeroButton.addEventListener('click', function() {
+    appendNum('0');
+});
 
 function appendNum(num) {
     if (display.textContent === '0' || resetScreen) reset();
     display.textContent += num;
 }
 
-function setOperation(operation) {
-    if(currentOperator !== null) calculate();
-    firstNum = display.textContent;
-    currentOperator = operation;
-    resetScreen = true;
+function deleteNum() {
+    display.textContent = display.textContent.slice(0, -1);
 }
 
-function calculate() {
-    if(currentOperator === null || resetScreen) return;
-    if(currentOperator === '÷' && display.textContent === '0') {
-        display.textContent = "Not a number";
-        clearScreen();
-        return;
+function percentage() {
+    if(display.textContent !== '') {
+        let num = (Number(display.textContent) / 100) * 1.0;
+        display.textContent = num;
     }
-    secondNum = display.textContent;
-    console.log('CHEGOU');
-    display.textContent = roundNum(operate(currentOperator, firstNum, secondNum));
-    console.log(display.textContent);
-    currentOperator = null;
-}
-
-function roundNum(num) {
-    return Math.round(num * 100) / 100;
 }
 
 function reset() {
@@ -86,13 +76,39 @@ function clearScreen() {
     resetScreen = false;
 }
 
+function setOperation(operation) {
+    if(currentOperator !== null) calculate();
+    firstNum = display.textContent;
+    currentOperator = operation;
+    resetScreen = true;
+}
+
+function calculate() {
+    if(currentOperator === null || resetScreen) return;
+    if(currentOperator === '÷' && display.textContent === '0') {
+        alert("Not a number");
+        clearScreen();
+        return;
+    }
+    secondNum = display.textContent;
+    display.textContent = roundNum(operate(currentOperator, firstNum, secondNum));
+    currentOperator = null;
+}
+
+function roundNum(num) {
+    return Math.round(num * 100) / 100;
+}
+
 function multiply (a, b) {
     return a * b;
 }
 
 function divide (a, b) {
-    if(b === 0) return null;
-        else return a / b;
+    if(b === 0) {
+        return null;
+    } else {
+        return a / b;
+    }
 }
 
 function add (a, b) {
@@ -104,8 +120,11 @@ function subtract (a, b) {
 }
 
 function operate (operator, a, b) {
-    switch(operate) {
-        case '*':
+    //MAKE SURE THESE ARE INTEGERS AND NOT STRINGS
+    a = Number(a);
+    b = Number(b);
+    switch(operator) {
+        case 'x':
             return multiply(a, b);;
         case '÷':
             return divide(a, b);
@@ -116,5 +135,4 @@ function operate (operator, a, b) {
         default:
             return null;
     }
-    return value;
 }
