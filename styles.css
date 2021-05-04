@@ -9,6 +9,7 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    height: 100vh;
 }
 
 /* TODO: Edit the sizing here so that it does not shrink too much */
@@ -18,7 +19,6 @@ body {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-    gap: 0px 0px;
     grid-template-areas:
     "screen screen screen screen"
     "screen screen screen screen"
@@ -45,15 +45,16 @@ body {
 /* TODO: Make this better 
    FIXME: Make the font size responsive.*/
 #history {
-    padding-top: 0.5rem;
+    padding-top: 1rem;
     padding-right: 0.5rem;
 }
 
 /* TODO: Make this better as well.
    FIXME: Make the font size responsive. */
 #current_number {
-    padding-top: 1em;
-    font-size: 3rem;
+    padding-top: 0.50em;
+    padding-right: 0.5rem;
+    font-size: 4rem;
 }
 
 button {
